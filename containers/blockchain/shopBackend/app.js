@@ -83,5 +83,10 @@ const utils = require('./utils/util');
   const port = process.env.PORT || process.env.VCAP_APP_PORT || 3002;
   app.listen(port, function () {
     console.log('Server running on port: %d', port);
+<<<<<<< HEAD
   });
 })();
+=======
+  });*/
+})();
+>>>>>>> Modify blockchain deployment for linuxOne

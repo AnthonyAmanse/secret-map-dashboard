@@ -1,4 +1,4 @@
-FROM docker.io/hyperledger/fabric-peer:x86_64-1.0.2
+FROM docker.io/hyperledger/fabric-peer:s390x-1.0.4
 
 RUN mkdir /peer
 COPY crypto /peer/crypto
