@@ -21,7 +21,7 @@ services:
 
   couchdb0:
     container_name: couchdb0
-    image: hyperledger/fabric-couchdb:x86_64-1.0.2
+    image: hyperledger/fabric-couchdb:s390x-1.0.4
     environment:
       - COUCHDB_USER=
       - COUCHDB_PASSWORD=
@@ -30,7 +30,7 @@ services:
 
   couchdb1:
     container_name: couchdb1
-    image: hyperledger/fabric-couchdb:x86_64-1.0.2
+    image: hyperledger/fabric-couchdb:s390x-1.0.4
     environment:
       - COUCHDB_USER=
       - COUCHDB_PASSWORD=
@@ -140,8 +140,8 @@ services:
     environment:
     - PORT 3000
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:x86_64-1.0.2
     - SECRETSDIR=/run/secrets
+    - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
     volumes:
     - /var/run/:/host/var/run/
     depends_on:
@@ -163,10 +163,10 @@ services:
     - PORT=3000
     - ORGID=org.ShopOrg
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:x86_64-1.0.2
     - SECRETSDIR=/run/secrets
     - RABBITMQQUEUE=seller_queue
     - SOCKETPORT=3030
+    - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
     ports:
     - 3002:3000
     - 3030:3030
@@ -193,10 +193,10 @@ services:
     - PORT=3000
     - ORGID=org.FitCoinOrg
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:x86_64-1.0.2
     - SECRETSDIR=/run/secrets
     - RABBITMQQUEUE=user_queue
     - SOCKETPORT=3030
+    - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
     ports:
     - 3001:3000
     - 3031:3030
