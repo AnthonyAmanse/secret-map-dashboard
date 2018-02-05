@@ -18,8 +18,8 @@ sh generate-cfgtx.sh
 rm -rf $PROJPATH/{orderer,shopPeer,fitcoinPeer}/crypto
 mkdir $PROJPATH/{orderer,shopPeer,fitcoinPeer}/crypto
 cp -r $ORDERERS/orderer-org/orderers/orderer0/{msp,tls} $PROJPATH/orderer/crypto
-cp -r $PEERS/shop-org/peers/shop-peer/{msp,tls} $PROJPATH/shopPeer/crypto
-cp -r $PEERS/fitcoin-org/peers/fitcoin-peer/{msp,tls} $PROJPATH/fitcoinPeer/crypto
+cp -r $PEERS/shop-org/peers/shop-peer.default.svc.cluster.local/{msp,tls} $PROJPATH/shopPeer/crypto
+cp -r $PEERS/fitcoin-org/peers/fitcoin-peer.default.svc.cluster.local/{msp,tls} $PROJPATH/fitcoinPeer/crypto
 cp $CLIPATH/genesis.block $PROJPATH/orderer/crypto/
 
 SHOPCAPATH=$PROJPATH/shopCertificateAuthority
@@ -102,4 +102,4 @@ cp -r $WEBCERTS/set-up/* $BACKEND/set-up/
 #cp $PROJPATH/configuration/fitcoin-config.js $FITCOIN/set-up/config.js
 #mv $FITCOIN/channel.tx $FITCOIN/set-up/channel.tx
 
-rm -rf $CLIPATH
+# rm -rf $CLIPATH

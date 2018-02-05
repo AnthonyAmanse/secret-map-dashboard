@@ -50,6 +50,8 @@ const WebSocket = require('ws');
     ws.on('error', () => console.log('Connection closed'));
   });
   peer.clients[0].on('block', block => {
+    console.log("Emmitting data: ")
+    console.log(block);
     wss.broadcast(block);
   });
   app.use(bodyParser.urlencoded({

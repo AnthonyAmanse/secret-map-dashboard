@@ -10,7 +10,7 @@ PeerOrgs:
   Domain: shop-org
   Specs:
   - Hostname: shop-peer
-    CommonName: "{{.Hostname}}"
+    CommonName: shop-peer.default.svc.cluster.local
   Template:
     Count: 2
   Users:
@@ -19,7 +19,7 @@ PeerOrgs:
   Domain: fitcoin-org
   Specs:
   - Hostname: fitcoin-peer
-    CommonName: "{{.Hostname}}"
+    CommonName: fitcoin-peer.default.svc.cluster.local
   Template:
     Count: 2
   Users:

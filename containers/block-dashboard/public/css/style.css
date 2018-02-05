@@ -1,0 +1,92 @@
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 150px;
+  background-color: #68fce6;
+  font-family: 'Open Sans';
+  color: #000 ;
+  margin-bottom: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#header #title {
+  font-size: 35pt;
+}
+
+#header #subtitle {
+  margin-top: 10pt;
+  font-size: 10pt;
+}
+
+body {
+  margin: 0;
+}
+
+.blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 25px;
+  grid-row-gap: 50px;
+  padding-left: 5%;
+  padding-right: 5%;
+  /* background-color: black; */
+}
+
+.block-item {
+  display: flex;
+  /* font-size: 50pt; */
+  font-family: 'Open Sans';
+  background-color: lightblue;
+  padding: 12pt;
+  justify-content: left;
+  align-items: center;
+  /* border: 1px solid black; */
+  border-radius: 5px;
+}
+
+.block-item .blockTable .id {
+  font-size: 20pt;
+}
+
+.block-item .blockTable .fingerprint {
+  font-size: 8pt;
+}
+
+.block-item .blockTable .timestamp {
+  font-size: 8pt;
+}
+
+.block-item .blockTable .message td {
+  font-size: 12pt;
+  text-align: justify;
+  /* border: 1px dashed black; */
+}
+
+.block-item .blockTable .transactionId td {
+  font-size: 8pt;
+  text-align: justify;
+  /* border: 1px dashed black; */
+}
+
+.block-item .blockTable tr.fingerprint>td {
+  padding-top: 10pt;
+}
+
+.block-item .blockTable tr.message>td {
+  padding-top: 20pt;
+}
+
+.block-item .blockTable tr.payload>td {
+  padding-top: 20pt;
+}
+
+.block-item .blockTable tr.transactionId>td {
+  padding-top: 50pt;
+  max-width: 18pt;
+  word-wrap: break-word;
+  /* text-overflow: ellipsis; */
+  /* overflow: scroll; */
+}

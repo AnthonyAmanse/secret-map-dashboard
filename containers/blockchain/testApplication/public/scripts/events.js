@@ -3,16 +3,16 @@ class Events {
   constructor() {
     //const socket = new WebSocket('ws://localhost:8080');;
     //socket.on('block', (evt) => this.doSocketMessage(evt));
-    var ws = new WebSocket('ws://localhost:8080');
+    var ws = new WebSocket('ws://148.100.108.176:8080');
     var self = this;
     // Load initial data
     this.xhr = new XMLHttpRequest();
     this.xhr.addEventListener('load', () => this.loadData());
-    this.xhr.open('GET', "http://localhost:3002/api/blocks?noOfLastBlocks=15", true);
+    this.xhr.open('GET', "http://148.100.108.176:3002/api/blocks?noOfLastBlocks=15", true);
     this.xhr.send(null);
     ws.onmessage = function(event) {
-      //console.log("Received Event ");
-      //console.log(JSON.parse(event.data));
+      console.log("Received Event ");
+      console.log(JSON.parse(event.data));
       self.update(JSON.parse(event.data));
     };
     ws.onopen = function(event) {
@@ -30,11 +30,11 @@ class Events {
   }
   loadData() {
     var data = JSON.parse(this.xhr.responseText).result;
-    data = (JSON.parse(data).result).sort((a, b) => a.id > b.id);
+    data = (JSON.parse(data).result) // .sort((a, b) => parseInt(a.id) - parseInt(b.id));
     data.forEach(function(eventData) {
       console.log(eventData);
       var rowData = "<tr class='anim highlight'><td width='10%'>" + eventData["id"] + "</td><td width='20%'>" + eventData["fingerprint"] + "</td><td width='50%'>" + JSON.stringify(eventData["transactions"]) + "</td></tr>";
-      $(rowData).hide().prependTo('#table_view tbody').fadeIn("slow").addClass('normal');
+      $(rowData).hide().appendTo('#table_view tbody').fadeIn("slow").addClass('normal');
     });
   }
 }
