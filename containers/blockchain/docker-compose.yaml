@@ -147,7 +147,7 @@ services:
     environment:
     - PORT 3000
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - SECRETSDIR=/run/secrets
+    - SECRETSDIR=/host/run/secrets
     - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
     volumes:
     - /var/run/:/host/var/run/
@@ -174,7 +174,7 @@ services:
     - PORT=3000
     - ORGID=org.ShopOrg
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - SECRETSDIR=/run/secrets
+    - SECRETSDIR=/host/run/secrets
     - RABBITMQQUEUE=seller_queue
     - SOCKETPORT=3030
     - MESSAGEEXPIRY=600
@@ -209,7 +209,7 @@ services:
     - PORT=3000
     - ORGID=org.FitCoinOrg
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - SECRETSDIR=/run/secrets
+    - SECRETSDIR=/host/run/secrets
     - RABBITMQQUEUE=user_queue
     - SOCKETPORT=3030
     - MESSAGEEXPIRY=600
