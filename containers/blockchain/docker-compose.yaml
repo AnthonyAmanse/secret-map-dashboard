@@ -140,10 +140,12 @@ services:
     environment:
     - PORT 3000
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - SECRETSDIR=/run/secrets
+    - SECRETSDIR=/host/run/secrets
     - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
     volumes:
     - /var/run/:/host/var/run/
+    - /home/linux1/secret-map-dashboard/containers/blockchain/configuration/channel.tx:/host/run/secrets/channel
+    - /home/linux1/secret-map-dashboard/containers/blockchain/configuration/config.json:/host/run/secrets/config
     depends_on:
     - orderer0
     - shop-ca
@@ -152,9 +154,9 @@ services:
     - fitcoin-peer
     - couchdb0
     - couchdb1
-    secrets:
-      - config
-      - channel
+    # secrets:
+    # - config
+    # - channel
 
   shop-backend :
     container_name: shop-backend
@@ -163,7 +165,7 @@ services:
     - PORT=3000
     - ORGID=org.ShopOrg
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - SECRETSDIR=/run/secrets
+    - SECRETSDIR=/host/run/secrets
     - RABBITMQQUEUE=seller_queue
     - SOCKETPORT=3030
     - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
@@ -172,6 +174,8 @@ services:
     - 3030:3030
     volumes:
     - /var/run/:/host/var/run/
+    - /home/linux1/secret-map-dashboard/containers/blockchain/configuration/channel.tx:/host/run/secrets/channel
+    - /home/linux1/secret-map-dashboard/containers/blockchain/configuration/config.json:/host/run/secrets/config
     depends_on:
     - orderer0
     - shop-ca
@@ -182,9 +186,9 @@ services:
     - couchdb1
     - blockchain-setup
     - rabbitmq
-    secrets:
-      - config
-      - channel
+    # secrets:
+    #  - config
+    #  - channel
 
   fitcoin-backend :
     container_name: fitcoin-backend
@@ -193,7 +197,7 @@ services:
     - PORT=3000
     - ORGID=org.FitCoinOrg
     - DOCKER_SOCKET_PATH=/host/var/run/docker.sock
-    - SECRETSDIR=/run/secrets
+    - SECRETSDIR=/host/run/secrets
     - RABBITMQQUEUE=user_queue
     - SOCKETPORT=3030
     - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
@@ -202,6 +206,8 @@ services:
     - 3031:3030
     volumes:
     - /var/run/:/host/var/run/
+    - /home/linux1/secret-map-dashboard/containers/blockchain/configuration/channel.tx:/host/run/secrets/channel
+    - /home/linux1/secret-map-dashboard/containers/blockchain/configuration/config.json:/host/run/secrets/config
     depends_on:
     - orderer0
     - shop-ca
@@ -212,12 +218,12 @@ services:
     - couchdb1
     - blockchain-setup
     - rabbitmq
-    secrets:
-      - config
-      - channel
+    # secrets:
+    #  - config
+    #  - channel
 
-secrets:
-  config:
-    file: ./configuration/config.json
-  channel:
-    file: ./configuration/channel.tx
+# secrets:
+  # config:
+    # file: ./configuration/config.json
+  # channel:
+    # file: ./configuration/channel.tx
