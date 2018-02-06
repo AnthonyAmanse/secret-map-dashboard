@@ -1,6 +1,13 @@
 version: "3.1"
 
 services:
+  redis-server:
+    container_name: redis-server
+    image: redis:4.0.5-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - 6379:6379
+
   shop-ca:
     container_name: shop-ca
     image: shop-ca
@@ -154,6 +161,8 @@ services:
     - fitcoin-peer
     - couchdb0
     - couchdb1
+    - rabbitmq
+    - redis-server
     # secrets:
     # - config
     # - channel
@@ -169,6 +178,8 @@ services:
     - RABBITMQQUEUE=seller_queue
     - SOCKETPORT=3030
     - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
+    - MESSAGEEXPIRY=600
+    - WORKERCLIENTS=1
     ports:
     - 3002:3000
     - 3030:3030
@@ -186,6 +197,7 @@ services:
     - couchdb1
     - blockchain-setup
     - rabbitmq
+    - redis-server
     # secrets:
     #  - config
     #  - channel
@@ -201,6 +213,8 @@ services:
     - RABBITMQQUEUE=user_queue
     - SOCKETPORT=3030
     - DOCKER_CCENV_IMAGE=hyperledger/fabric-ccenv:s390x-1.0.4
+    - MESSAGEEXPIRY=600
+    - WORKERCLIENTS=1
     ports:
     - 3001:3000
     - 3031:3030
@@ -218,6 +232,7 @@ services:
     - couchdb1
     - blockchain-setup
     - rabbitmq
+    - redis-server
     # secrets:
     #  - config
     #  - channel
