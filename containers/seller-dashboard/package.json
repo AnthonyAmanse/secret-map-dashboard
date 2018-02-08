@@ -15,7 +15,9 @@
     "url": "https://github.com/IBM/secret-map-dashboard"
   },
   "dependencies": {
-    "express": "^4.15.x"
+    "ejs": "^2.5.7",
+    "express": "^4.15.x",
+    "request": "^2.83.0"
   },
   "author": "Anthony Amanse",
   "license": "Apache-2.0"

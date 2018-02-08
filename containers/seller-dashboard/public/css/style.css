@@ -84,7 +84,7 @@ body {
   justify-content: center;
   font-family: 'Open Sans';
   align-items: center;
-  border-right: 5px solid black;
+  border-right: 2px solid black;
 }
 
 .contract-table {
@@ -97,8 +97,9 @@ body {
 }
 
 .contract-user-row {
-  font-size: 24pt;
+  font-size: 14pt;
   text-align: left;
+  font-weight: bold;
 }
 
 .contract-product-row {
@@ -122,6 +123,18 @@ body {
   font-size: 8pt;
 }
 
+#content.not-found {
+  display: grid;
+  padding-top: 100px;
+  grid-template-columns: 1fr;
+}
+
+.not-found {
+  font-size: 50pt;
+  text-align: center;
+  font-family: 'Open Sans';
+}
+
 .contract-total-row {
   text-align: left;
   font-size: 35pt;
@@ -132,6 +145,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border-left: 2px solid black;
 }
 
 #complete-button {
@@ -175,4 +189,25 @@ body {
 
 #decline-button:active {
   transform: scale(0.9, 0.9);
+}
+
+.transaction-payload {
+  font-family: 'Open Sans';
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.list-of-contracts {
+  display: grid;
+  font-family: 'Open Sans';
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.table-of-a-contract {
+  display: flex;
+  padding-top: 50px;
 }

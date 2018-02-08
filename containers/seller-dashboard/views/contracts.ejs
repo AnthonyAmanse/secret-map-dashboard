@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Contracts</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header">
+      <div id="title">
+        Blockchain Contracts
+      </div>
+      <div id="subtitle">
+        secret map: an ibm code experiment
+      </div>
+    </div>
+    <div class="list-of-contracts">
+      <% list.forEach(function(contract) { %>
+        <table class="table-of-a-contract">
+          <tr><td>Contract ID:</td><td><%= contract.id %></td></tr>
+          <tr><td>User ID:</td><td><%= contract.userId %></td></tr>
+          <tr><td>Product ID:</td><td><%= contract.productId %></td></tr>
+          <tr><td>Quantity:</td><td><%= contract.quantity %></td></tr>
+          <tr><td>Total Fitcoins:</td><td><%= contract.price %></td></tr>
+          <tr><td>State:</td><td><%= contract.state %></td></tr>
+        </table>
+      <% }); %>
+    </div>
+  </body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/requests.js"></script>
