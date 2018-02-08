@@ -1,0 +1,213 @@
+body {
+  margin: 0;
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 150px;
+  background-color: #68fce6;
+  font-family: 'Open Sans';
+  color: #000 ;
+  margin-bottom: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#header #title {
+  font-size: 35pt;
+}
+
+#header #subtitle {
+  margin-top: 10pt;
+  font-size: 10pt;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar #contract-id {
+  font-family: 'Open Sans';
+  height: 50px;
+  font-size: 20pt;
+  text-align: center;
+  resize: horizontal;
+}
+
+.search-bar #submit-contract-id {
+  height: 50px;
+  width: 50px;
+  margin-left: 10px;
+  background-color: white;
+  background-image: url('/assets/search.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 0;
+  outline: none;
+}
+
+.search-bar #submit-contract-id:focus {
+  outline: 0;
+}
+
+.search-bar #submit-contract-id:hover {
+  background-color: white;
+  transition: all 0.2s linear;
+  background-image: url('/assets/search-hover.png');
+}
+
+.search-bar #submit-contract-id:active {
+  background-color: white;
+  transform: scale(0.9, 0.9);
+  background-image: url('/assets/search-hover.png');
+}
+
+#content {
+  display: grid;
+  padding-top: 100px;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* show table borders debug*/
+/* .contract-table, .contract-id-row td, .contract-product-row td, .contract-total-row td{
+  border: 1px solid black;
+} */
+
+.contract-details {
+  display: flex;
+  justify-content: center;
+  font-family: 'Open Sans';
+  align-items: center;
+  border-right: 2px solid black;
+}
+
+.contract-table {
+  width: 80%;
+}
+
+.contract-id-row {
+  font-size: 12pt;
+  text-align: left;
+}
+
+.contract-user-row {
+  font-size: 14pt;
+  text-align: left;
+  font-weight: bold;
+}
+
+.contract-product-row {
+  padding-top: 10px;
+  text-align: left;
+  font-size: 24pt;
+}
+
+.product-name {
+  font-size: 50pt;
+  width: 50%;
+}
+
+.product-quantity {
+  text-align: center;
+  width: 50%;
+}
+
+.contract-label {
+  text-align: center;
+  font-size: 8pt;
+}
+
+#content.not-found {
+  display: grid;
+  padding-top: 100px;
+  grid-template-columns: 1fr;
+}
+
+.not-found {
+  font-size: 50pt;
+  text-align: center;
+  font-family: 'Open Sans';
+}
+
+.contract-total-row {
+  text-align: left;
+  font-size: 35pt;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-left: 2px solid black;
+}
+
+#complete-button {
+  height: 50px;
+  width: 300px;
+  background-color: rgb(170, 157, 252);
+  font-family: 'Open Sans';
+  font-size: 18pt;
+  border: 0;
+  color: white;
+  border-radius: 25px;
+  outline: none;
+}
+
+#complete-button:hover {
+  background: lightblue;
+  transition: all 0.1s linear;
+}
+
+#complete-button:active {
+  transform: scale(0.9, 0.9);
+  color: gray;
+}
+
+#decline-button {
+  margin-top: 50px;
+  height: 30px;
+  border: 0;
+  font-family: 'Open Sans';
+  font-size: 8pt;
+  color: white;
+  background-color: red;
+  border-radius: 15px;
+  outline: none;
+}
+
+#decline-button:hover {
+  background: maroon;
+  transition: all 0.1s linear;
+}
+
+#decline-button:active {
+  transform: scale(0.9, 0.9);
+}
+
+.transaction-payload {
+  font-family: 'Open Sans';
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.list-of-contracts {
+  display: grid;
+  font-family: 'Open Sans';
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.table-of-a-contract {
+  display: flex;
+  padding-top: 50px;
+}

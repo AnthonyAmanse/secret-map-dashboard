@@ -1,0 +1,24 @@
+{
+  "name": "seller-dashboard",
+  "main": "app.js",
+  "description": "seller-dashboard",
+  "version": "1.0.0",
+  "private": false,
+  "engines": {
+    "node": "6.*"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBM/secret-map-dashboard"
+  },
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.15.x",
+    "request": "^2.83.0"
+  },
+  "author": "Anthony Amanse",
+  "license": "Apache-2.0"
+}
