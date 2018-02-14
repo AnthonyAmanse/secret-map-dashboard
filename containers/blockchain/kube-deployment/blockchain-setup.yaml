@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blockchain-setup
+spec:
+  restartPolicy: "Never"
+  containers:
+  - image: anthonyamanse/blockchain-setup:latest
+    imagePullPolicy: Always
+    # command: ["sleep"]
+    # args: ["10m"]
+    name: blockchain-setup
+    securityContext:
+      privileged: true
+    env:
+      - name: PORT
+        value: "3000"
+      - name: DOCKER_SOCKET_PATH
+        value: /host/var/run/docker.sock
+      - name: DOCKER_CCENV_IMAGE
+        value: "hyperledger/fabric-ccenv:x86_64-1.0.2"
+      - name: SECRETSDIR
+        value: /host/var/run/secrets
+    volumeMounts:
+      - name: dockersocket
+        mountPath: /host/var/run/docker.sock
+      - name: secret-volume
+        mountPath: /host/var/run/secrets
+  volumes:
+    - name: dockersocket
+      hostPath:
+        path: /var/run/docker.sock
+    - name: secret-volume
+      secret:
+        secretName: secret-files
+        items:
+          - key: config.json
+            path: config
+          - key: channel.tx
+            path: channel

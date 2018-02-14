@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fitcoin-backend
+  labels:
+    app: fitcoin-backend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      name: fitcoin-port-1
+    - port: 3030
+      name: fitcoin-port-2
+  selector:
+    app: fitcoin-backend
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: fitcoin-backend-deployment
+  labels:
+    app: fitcoin-backend
+spec:
+  template:
+    metadata:
+      labels:
+        app: fitcoin-backend
+    spec:
+      containers:
+      - image: anthonyamanse/fitcoin-backend:latest
+        imagePullPolicy: Always
+        workingDir: /peer
+        command: ["peer"]
+        args: ["node", "start"]
+        name: fitcoin-backend
+        ports:
+        - containerPort: 3000
+        - containerPort: 3030
+        env:
+          - name: PORT
+            value: "3000"
+          - name: ORGID
+            value: org.FitCoinOrg
+          - name: DOCKER_SOCKET_PATH # Need to Edit
+            value: /host/var/run/docker.sock # Need to Edit
+          - name: DOCKER_CCENV_IMAGE
+            value: hyperledger/fabric-ccenv:x86_64-1.0.2    
+          - name: SECRETSDIR
+            value: /host/var/run/secrets
+          - name: RABBITMQQUEUE
+            value: user_queue
+          - name: SOCKETPORT
+            value: 3030
+          - name: MESSAGEEXPIRY
+            value: 600
+        volumeMounts:
+          - name: blockchain-volume
+            mountPath: "/host/var/run/docker.sock"
+          - name: secret-volume
+            mountPath: /host/var/run/secrets
+      volumes:
+        - name: blockchain-volume
+          hostPath:
+            path: /var/run/docker.sock
+        - name: secret-volume
+          secret:
+            secretName: secret-files
+            items:
+              - key: config.json
+                path: config
+              - key: channel.tx
+                path: channel

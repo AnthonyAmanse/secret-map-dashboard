@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: couchdb1
+  labels:
+    app: couchdb1
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5984
+  selector:
+    app: couchdb1
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: couchdb1-deployment
+  labels:
+    app: couchdb1
+spec:
+  template:
+    metadata:
+      labels:
+        app: couchdb1
+    spec:
+      containers:
+      - image: hyperledger/fabric-couchdb:x86_64-1.0.2
+        imagePullPolicy: Always
+        name: couchdb1
+        ports:
+        - containerPort: 5984
+          name: couchdb1
+        env:
+          - name: COUCHDB_USER
+            value: ""
+          - name: COUCHDB_PASSWORD
+            value: ""
