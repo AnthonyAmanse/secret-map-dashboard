@@ -2,7 +2,7 @@
 class Events {
   constructor() {
     var self = this;
-    self.block = io.connect('http://prod.ibm-fitchain.com:3030/block');
+    self.block = io.connect('http://148.100.98.53:3030/block');
     self.block.on('block', (data) => {
       console.log(data);
       self.update(JSON.parse(data));
@@ -22,7 +22,7 @@ class Events {
     };
     var self = this;
     $.ajax({
-      url: "http://prod.ibm-fitchain.com:3000/api/execute",
+      url: "http://148.100.98.53:3000/api/execute",
       type: "POST",
       data: JSON.stringify(query),
       dataType: 'json',
@@ -43,7 +43,7 @@ class Events {
   getResults(resultId, attemptNo, self) {
     if(attemptNo < 60) {
       //console.log("Attempt no " + attemptNo);
-      $.get("http://prod.ibm-fitchain.com:3000/api/results/" + resultId).done(function (data) {
+      $.get("http://148.100.98.53:3000/api/results/" + resultId).done(function (data) {
         data = typeof data !== "string" ? data : JSON.parse(data);
         // console.log(" Status  " + data.status);
         if(data.status === "done") {
