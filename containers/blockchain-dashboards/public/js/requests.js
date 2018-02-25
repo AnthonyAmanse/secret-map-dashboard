@@ -8,11 +8,12 @@ if (searchButton) {
 
 function searchContractById() {
   var type = "query";
-  var userId = "1cb20708-4979-45b3-bb7e-55a3e54944cb"; // SHOULD BE A SELLER ID
+  var userId = "06f2a544-bcdd-4b7d-8484-88f693e10aae"; // SHOULD BE A SELLER ID
   var fcn = "getState"
   var args = $('#contract-id').val().split(',');
   var input = {
     type: type,
+    queue: 'seller_queue',
     params: {
       userId: userId,
       fcn: fcn,
@@ -26,7 +27,7 @@ function searchContractById() {
 
 function requestServer(params, queryOrInvoke) {
   $.ajax({
-    url: "http://148.100.108.176:3002/api/execute",
+    url: "http://prod.ibm-fitchain.com:3000/api/execute",
     type: "POST",
     data: JSON.stringify(params),
     dataType: 'json',
@@ -46,7 +47,7 @@ function requestServer(params, queryOrInvoke) {
 function getResults(resultId, attemptNo, queryOrInvoke) {
   if(attemptNo < 60) {
     //console.log("Attempt no " + attemptNo);
-    $.get("http://148.100.108.176:3002/api/results/" + resultId).done(function (data) {
+    $.get("http://prod.ibm-fitchain.com:3000/api/results/" + resultId).done(function (data) {
       data = typeof data !== "string" ? data : JSON.parse(data);
       //console.log(" Status  " + data.status);
       if(data.status === "done") {
@@ -78,14 +79,14 @@ function updateDashboard(receivedPayload) {
 
     $(contractNotFound).hide().appendTo("#content").fadeIn(1000);
   } else {
-    let contractData = JSON.parse(JSON.parse(receivedPayload.result).response);
+    let contractData = JSON.parse(receivedPayload.result);
     console.log(contractData);
     let tableOfContract = "<div class='contract-details'>" +
     "<table class='contract-table'>" +
     "<tr class='contract-id-row'><td colspan='2'><span>" + contractData['id'] + "</span><br/><span class='contract-label'>Contract ID</span></td></tr>" +
     "<tr class='contract-user-row'><td colspan='2'><span>" + contractData['userId'] + "</span><br/><span class='contract-label'>User ID</span></td></tr>" +
     "<tr class='contract-product-row'><td class='product-name'>" + contractData['productId'] + "</td><td class='product-quantity'><span>x " + contractData['quantity'] + "</span><br/><span class='contract-label'>Quantity</span></td></tr>" +
-    "<tr class='contract-total-row'><td colspan='2'><span>" + contractData['price'] + "</span> <span class='contract-label'> Fitcoins</span></td></tr>" +
+    "<tr class='contract-total-row'><td colspan='2'><span>" + contractData['cost'] + "</span> <span class='contract-label'> Fitcoins</span></td></tr>" +
     "</table></div>";
 
     let rightSide = "";
@@ -94,7 +95,7 @@ function updateDashboard(receivedPayload) {
       rightSide = "<div class='buttons'>" +
       "<button id='complete-button' onclick='completeTransaction()'>Complete</button>" +
       // "<span>Transaction payload?</span>" +
-      "<button id='decline-button'>Decline</button>" +
+      "<button id='decline-button' onclick='declineTransaction()'>Decline</button>" +
       "</div>";
     } else {
       rightSide = "<div class='buttons'><div class='transaction-payload'>The transaction has already been " +
@@ -115,12 +116,35 @@ function updateRightContents(receivedPayload) {
 
 function completeTransaction() {
   var type = "invoke";
-  var userId = "1cb20708-4979-45b3-bb7e-55a3e54944cb"; // SHOULD BE A SELLER ID
+  var userId = "06f2a544-bcdd-4b7d-8484-88f693e10aae"; // SHOULD BE A SELLER ID
   var fcn = "transactPurchase"
   var args = $('#contract-id').val().split(',');
   args.push("complete");
+  args.unshift(userId);
   var input = {
     type: type,
+    queue: 'seller_queue',
+    params: {
+      userId: userId,
+      fcn: fcn,
+      args: args
+    }
+  };
+
+  console.log(input);
+  requestServer(input, "invoke");
+}
+
+function declineTransaction() {
+  var type = "invoke";
+  var userId = "06f2a544-bcdd-4b7d-8484-88f693e10aae"; // SHOULD BE A SELLER ID
+  var fcn = "transactPurchase"
+  var args = $('#contract-id').val().split(',');
+  args.push("declined");
+  args.unshift(userId);
+  var input = {
+    type: type,
+    queue: 'seller_queue',
     params: {
       userId: userId,
       fcn: fcn,

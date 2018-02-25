@@ -2,7 +2,7 @@
 class Events {
   constructor() {
     var self = this;
-    self.block = io.connect('http://148.100.108.176:3030/block');
+    self.block = io.connect('http://prod.ibm-fitchain.com:3030/block');
     self.block.on('block', (data) => {
       console.log(data);
       self.update(JSON.parse(data));
@@ -15,13 +15,14 @@ class Events {
   requestBlocks() {
     var query = {
       type: "blocks",
+      queue: "seller_queue",
       params: {
         "noOfLastBlocks": "20"
       }
     };
     var self = this;
     $.ajax({
-      url: "http://148.100.108.176:3002/api/execute",
+      url: "http://prod.ibm-fitchain.com:3000/api/execute",
       type: "POST",
       data: JSON.stringify(query),
       dataType: 'json',
@@ -42,9 +43,9 @@ class Events {
   getResults(resultId, attemptNo, self) {
     if(attemptNo < 60) {
       //console.log("Attempt no " + attemptNo);
-      $.get("http://148.100.108.176:3002/api/results/" + resultId).done(function (data) {
+      $.get("http://prod.ibm-fitchain.com:3000/api/results/" + resultId).done(function (data) {
         data = typeof data !== "string" ? data : JSON.parse(data);
-        //console.log(" Status  " + data.status);
+        // console.log(" Status  " + data.status);
         if(data.status === "done") {
           self.loadBlocks(JSON.parse(data.result));
         } else {
@@ -83,13 +84,13 @@ class Events {
       "<tr class='payload'><td colspan='2'>" + eventData['transactions'][0]['execution_response'][0]['payload'] + "</td></tr>" +
       "<tr class='transactionId'><td colspan='2'>" + eventData['transactions'][0]['tx_id'] + "</td></tr>" +
       // end of a transaction...
-      
+
       "</table>" +
       "</div>";
     $(blockItem).hide().prependTo('.blocks').fadeIn("slow").addClass('block-item')
   }
   loadBlocks(data) {
-    data = data === "string" ? JSON.parse(JSON.parse(data).result) : JSON.parse(data.result);
+    data = data === "string" ? JSON.parse(data) : data;
     // console.log(data);
     data = data.result.sort((a,b) => b.id - a.id);
 
