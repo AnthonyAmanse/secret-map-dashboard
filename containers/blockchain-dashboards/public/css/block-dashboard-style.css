@@ -45,6 +45,8 @@ body {
   vertical-align: top;
   /* border: 1px solid black; */
   border-radius: 5px;
+  height: 400px;
+  overflow-y: scroll;
 
   /* min-width: 0;
   max-width: 100px;

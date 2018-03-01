@@ -1,5 +1,8 @@
 /*global document:false alert:false XMLHttpRequest:false */
 
+let BLOCKCHAIN_URL = "http://169.60.173.54:3000";
+let BLOCKCHAIN_SELLER_ID = "2b47706e-872f-4502-92e2-104d8f61b320";
+
 let searchButton = document.getElementById("submit-contract-id");
 
 if (searchButton) {
@@ -8,7 +11,7 @@ if (searchButton) {
 
 function searchContractById() {
   var type = "query";
-  var userId = "06f2a544-bcdd-4b7d-8484-88f693e10aae"; // SHOULD BE A SELLER ID
+  var userId = BLOCKCHAIN_SELLER_ID; // SHOULD BE A SELLER ID
   var fcn = "getState"
   var args = $('#contract-id').val().split(',');
   var input = {
@@ -27,7 +30,7 @@ function searchContractById() {
 
 function requestServer(params, queryOrInvoke) {
   $.ajax({
-    url: "http://148.100.98.53:3000/api/execute",
+    url: BLOCKCHAIN_URL + "/api/execute",
     type: "POST",
     data: JSON.stringify(params),
     dataType: 'json',
@@ -47,12 +50,13 @@ function requestServer(params, queryOrInvoke) {
 function getResults(resultId, attemptNo, queryOrInvoke) {
   if(attemptNo < 60) {
     //console.log("Attempt no " + attemptNo);
-    $.get("http://148.100.98.53:3000/api/results/" + resultId).done(function (data) {
+    $.get(BLOCKCHAIN_URL + "/api/results/" + resultId).done(function (data) {
       data = typeof data !== "string" ? data : JSON.parse(data);
       //console.log(" Status  " + data.status);
       if(data.status === "done") {
         console.log(JSON.parse(data.result));
         if (queryOrInvoke == "query") {
+          console.log(data.result)
           updateDashboard(JSON.parse(data.result));
         } else {
           updateRightContents(JSON.parse(data.result));
@@ -116,7 +120,7 @@ function updateRightContents(receivedPayload) {
 
 function completeTransaction() {
   var type = "invoke";
-  var userId = "06f2a544-bcdd-4b7d-8484-88f693e10aae"; // SHOULD BE A SELLER ID
+  var userId = BLOCKCHAIN_SELLER_ID; // SHOULD BE A SELLER ID
   var fcn = "transactPurchase"
   var args = $('#contract-id').val().split(',');
   args.push("complete");
@@ -133,11 +137,15 @@ function completeTransaction() {
 
   console.log(input);
   requestServer(input, "invoke");
+  document.getElementById("complete-button").disabled = true
+  document.getElementById("decline-button").disabled = true
+  document.getElementById("complete-button").style.opacity = 0.5
+  document.getElementById("decline-button").style.opacity = 0.5
 }
 
 function declineTransaction() {
   var type = "invoke";
-  var userId = "06f2a544-bcdd-4b7d-8484-88f693e10aae"; // SHOULD BE A SELLER ID
+  var userId = BLOCKCHAIN_SELLER_ID; // SHOULD BE A SELLER ID
   var fcn = "transactPurchase"
   var args = $('#contract-id').val().split(',');
   args.push("declined");
@@ -154,4 +162,8 @@ function declineTransaction() {
 
   console.log(input);
   requestServer(input, "invoke");
+  document.getElementById("complete-button").disabled = true
+  document.getElementById("decline-button").disabled = true
+  document.getElementById("complete-button").style.opacity = 0.5
+  document.getElementById("decline-button").style.opacity = 0.5
 }

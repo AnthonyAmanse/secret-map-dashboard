@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 150px;
+  background-color: #68fce6;
+  font-family: 'Open Sans';
+  color: #000 ;
+  margin-bottom: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#header #title {
+  font-size: 35pt;
+}
+
+#header #subtitle {
+  margin-top: 10pt;
+  font-size: 10pt;
+}
+
+#content {
+  display: grid;
+  padding-top: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.productid, .name, .price, .count {
+  display: block;
+}

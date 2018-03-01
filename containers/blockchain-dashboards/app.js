@@ -1,72 +1,73 @@
 const express = require("express");
 const app = express();
 const request =require("request");
+// const basicAuth = require('basic-auth-connect');
+// app.use(basicAuth('admin', 'ibmthinkdev1234'));
 
 app.use(express.static(__dirname + "/public"));
 
 let port = process.env.PORT || 8080;
 
-//getAllContracts
-// var input = {
-//   type: query,
-//   params: {
-//     userId: sellerID,
-//     fcn: getAllContracts
-//     args: (none)
+// const BLOCKCHAIN_URL = "http://169.60.173.54:3000";
+// const BLOCKCHAIN_SELLER_ID = "2b47706e-872f-4502-92e2-104d8f61b320";
+
+// app.get("/contracts", function (req,res) {
+//   // res.send("All contracts");
+//   let input = {
+//     type: "query",
+//     queue: "seller_queue",
+//     params: {
+//       userId: BLOCKCHAIN_SELLER_ID,
+//       fcn: "getAllContracts",
+//       args: []
+//     }
 //   }
+//   let options = {
+//     url: BLOCKCHAIN_URL + "/api/execute",
+//     method: "POST",
+//     body: JSON.stringify(input),
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   }
+//   request(options, function (err, _res, body) {
+//     if (err) _res.send(err);
+//     requestResults(JSON.parse(body).resultId, 0, res);
+//   });
+// });
+
+// function requestResults(resultId, attemptNo, callback) {
+//   let options = {
+//     url: BLOCKCHAIN_URL + "/api/results/" + resultId,
+//     method: "GET"
+//   }
+//   request(options, function (err, res, body) {
+//     if (err) res.send(err);
+//     if (JSON.parse(body).status == "done") {
+//       console.log(JSON.parse(body));
+//       const payload = JSON.parse(body).result;
+//       const resultPayload = JSON.parse(payload).result;
+//       callback.render('contracts', { list: JSON.parse(resultPayload)});
+//     } else {
+//       setTimeout(function () {
+//         console.log("Attempt no. " + attemptNo);
+//         requestResults(resultId, attemptNo++, callback);
+//       }, 1000);
+//     }
+//   });
 // }
-app.get("/contracts", function (req,res) {
-  // res.send("All contracts");
-  let input = {
-    type: "query",
-    params: {
-      userId: "1cb20708-4979-45b3-bb7e-55a3e54944cb",
-      fcn: "getAllContracts",
-      args: []
-    }
-  }
-  let options = {
-    url: "http://148.100.108.176:3002/api/execute",
-    method: "POST",
-    body: JSON.stringify(input),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  request(options, function (err, _res, body) {
-    if (err) _res.send(err);
-    requestResults(JSON.parse(body).resultId, 0, res);
-  });
-});
 
-function requestResults(resultId, attemptNo, callback) {
-  let options = {
-    url: "http://148.100.108.176:3002/api/results/" + resultId,
-    method: "GET"
-  }
-  request(options, function (err, res, body) {
-    if (err) res.send(err);
-    if (JSON.parse(body).status == "done") {
-      const payload = JSON.parse(body).result;
-      const resultPayload = JSON.parse(payload).result;
-      const contracts = JSON.parse(resultPayload).response;
-      callback.render('contracts', { list: JSON.parse(contracts)});
-    } else {
-      setTimeout(function () {
-        console.log("Attempt no. " + attemptNo);
-        requestResults(resultId, attemptNo++, callback);
-      }, 3000);
-    }
-  });
-}
-
-app.get("/contracts/:userId", function (req,res) {
-  res.send(req.params.userId);
-});
+// app.get("/contracts/:userId", function (req,res) {
+//   res.send(req.params.userId);
+// });
 
 app.get("/shop", function (req,res) {
   res.sendFile("/shop.html", {root: __dirname + "/public" });
-})
+});
+
+app.get("/products", function (req,res) {
+  res.sendFile("/products.html", {root: __dirname + "/public" });
+});
 
 app.set('view engine', 'ejs');
 app.use(require("body-parser").json());

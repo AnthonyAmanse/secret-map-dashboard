@@ -1,8 +1,12 @@
 /*eslint no-undef:0*/
+
+let BLOCKCHAIN_URL = "http://169.60.173.54:3000";
+let BLOCKCHAIN_SOCKET = "http://169.60.173.54:3030"
+
 class Events {
   constructor() {
     var self = this;
-    self.block = io.connect('http://148.100.98.53:3030/block');
+    self.block = io.connect(BLOCKCHAIN_SOCKET + '/block');
     self.block.on('block', (data) => {
       console.log(data);
       self.update(JSON.parse(data));
@@ -22,7 +26,7 @@ class Events {
     };
     var self = this;
     $.ajax({
-      url: "http://148.100.98.53:3000/api/execute",
+      url: BLOCKCHAIN_URL + "/api/execute",
       type: "POST",
       data: JSON.stringify(query),
       dataType: 'json',
@@ -43,7 +47,7 @@ class Events {
   getResults(resultId, attemptNo, self) {
     if(attemptNo < 60) {
       //console.log("Attempt no " + attemptNo);
-      $.get("http://148.100.98.53:3000/api/results/" + resultId).done(function (data) {
+      $.get(BLOCKCHAIN_URL + "/api/results/" + resultId).done(function (data) {
         data = typeof data !== "string" ? data : JSON.parse(data);
         // console.log(" Status  " + data.status);
         if(data.status === "done") {
@@ -76,17 +80,15 @@ class Events {
       "<table class='blockTable'>" +
       "<tr  class='id'><td>" + eventData["id"] + "</td></tr>" +
       "<tr class='fingerprint'><td>Fingerprint:</td><td class='fingerprint-data'>" + eventData['fingerprint'] + "</td></tr>" +
-      "<tr class='timestamp'><td colspan='2'>" + myDate + "</td></tr>" +
+      "<tr class='timestamp'><td colspan='2'>" + myDate + "</td></tr>";
 
-      // below are the transactions...
-      "<tr class='message'><td colspan='2'>" + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." + "</td></tr>" + // replace this with eventData's message
-      // "<tr class='fingerprint'><td>Message:</td><td>" + eventData['transactions'][0]['execution_response'][0]['message'] + "</td></tr>" +
-      "<tr class='payload'><td colspan='2'>" + eventData['transactions'][0]['execution_response'][0]['payload'] + "</td></tr>" +
-      "<tr class='transactionId'><td colspan='2'>" + eventData['transactions'][0]['tx_id'] + "</td></tr>" +
-      // end of a transaction...
+      var transactions = "";
+      eventData['transactions'].forEach(function (transaction) {
+        transactions += "<tr class='payload'><td colspan='2'>" + transaction['execution_response'][0]['payload'] + "</td></tr>" +
+        "<tr class='transactionId'><td colspan='2'>" + transaction['tx_id'] + "</td></tr>"  
+      })
 
-      "</table>" +
-      "</div>";
+    blockItem = blockItem + transactions + "</table>" + "</div>";
     $(blockItem).hide().prependTo('.blocks').fadeIn("slow").addClass('block-item')
   }
   loadBlocks(data) {
@@ -108,17 +110,15 @@ class Events {
         "<table class='blockTable'>" +
         "<tr  class='id'><td>" + eventData["id"] + "</td></tr>" +
         "<tr class='fingerprint'><td>Fingerprint:</td><td class='fingerprint-data'>" + eventData['fingerprint'] + "</td></tr>" +
-        "<tr class='timestamp'><td colspan='2'>" + myDate + "</td></tr>" +
+        "<tr class='timestamp'><td colspan='2'>" + myDate + "</td></tr>";
 
-        // below are the transactions...
-        "<tr class='message'><td colspan='2'>" + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." + "</td></tr>" + // replace this with eventData's message
-        // "<tr class='fingerprint'><td>Message:</td><td>" + eventData['transactions'][0]['execution_response'][0]['message'] + "</td></tr>" +
-        "<tr class='payload'><td colspan='2'>" + eventData['transactions'][0]['execution_response'][0]['payload'] + "</td></tr>" +
-        "<tr class='transactionId'><td colspan='2'>" + eventData['transactions'][0]['tx_id'] + "</td></tr>" +
-        // end of a transaction...
+      var transactions = "";
+      eventData['transactions'].forEach(function (transaction) {
+        transactions += "<tr class='payload'><td colspan='2'>" + transaction['execution_response'][0]['payload'] + "</td></tr>" +
+        "<tr class='transactionId'><td colspan='2'>" + transaction['tx_id'] + "</td></tr>"  
+      })
 
-        "</table>" +
-        "</div>";
+      blockItem = blockItem + transactions + "</table>" + "</div>";
       $(blockItem).hide().appendTo('.blocks').fadeIn("slow").addClass('block-item')
       // var rowData = "<tr class='anim highlight'><td width='10%'>" + eventData["id"] + "</td><td width='20%'>" + eventData["fingerprint"] + "</td><td width='50%'>" + JSON.stringify(eventData["transactions"]) + "</td></tr>";
       // $(rowData).hide().appendTo('#table_view tbody').fadeIn("slow").addClass('normal');
