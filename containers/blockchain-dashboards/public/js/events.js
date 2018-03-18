@@ -1,7 +1,7 @@
 /*eslint no-undef:0*/
 
-let BLOCKCHAIN_URL = "http://169.60.173.54:3000";
-let BLOCKCHAIN_SOCKET = "http://169.60.173.54:3030"
+let BLOCKCHAIN_URL = "http://169.60.173.51:3000";
+let BLOCKCHAIN_SOCKET = "http://169.60.173.51:3030"
 
 class Events {
   constructor() {
@@ -85,7 +85,7 @@ class Events {
       var transactions = "";
       eventData['transactions'].forEach(function (transaction) {
         transactions += "<tr class='payload'><td colspan='2'>" + transaction['execution_response'][0]['payload'] + "</td></tr>" +
-        "<tr class='transactionId'><td colspan='2'>" + transaction['tx_id'] + "</td></tr>"  
+        "<tr class='transactionId'><td colspan='2'>" + transaction['tx_id'] + "</td></tr>"
       })
 
     blockItem = blockItem + transactions + "</table>" + "</div>";
@@ -115,7 +115,7 @@ class Events {
       var transactions = "";
       eventData['transactions'].forEach(function (transaction) {
         transactions += "<tr class='payload'><td colspan='2'>" + transaction['execution_response'][0]['payload'] + "</td></tr>" +
-        "<tr class='transactionId'><td colspan='2'>" + transaction['tx_id'] + "</td></tr>"  
+        "<tr class='transactionId'><td colspan='2'>" + transaction['tx_id'] + "</td></tr>"
       })
 
       blockItem = blockItem + transactions + "</table>" + "</div>";

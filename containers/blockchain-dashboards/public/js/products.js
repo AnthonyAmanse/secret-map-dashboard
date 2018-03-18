@@ -1,7 +1,7 @@
 /*global document:false alert:false XMLHttpRequest:false */
 
-let BLOCKCHAIN_URL = "http://169.60.173.54:3000";
-let BLOCKCHAIN_SELLER_ID = "2b47706e-872f-4502-92e2-104d8f61b320";
+let BLOCKCHAIN_URL = "http://169.60.173.51:3000";
+let BLOCKCHAIN_SELLER_ID = "0991fc15-87c2-4f4e-b7e6-f3b3bfccfdb9";
 
 function getProductsForSale() {
   var type = "query";
