@@ -4,7 +4,7 @@
   align-items: center;
   flex-direction: column;
   height: 150px;
-  background-color: #68fce6;
+  background-color: rgb(234, 234, 234);
   font-family: 'Open Sans';
   color: #000 ;
   margin-bottom: 50px;
@@ -39,7 +39,7 @@ body {
   display: flex;
   /* font-size: 50pt; */
   font-family: 'Open Sans';
-  background-color: lightblue;
+  background-color: rgb(31, 179, 207);
   padding: 12pt;
   justify-content: center;
   vertical-align: top;

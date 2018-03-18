@@ -1,7 +1,7 @@
 /*eslint no-undef:0*/
 
-let BLOCKCHAIN_URL = "http://169.60.173.51:3000";
-let BLOCKCHAIN_SOCKET = "http://169.60.173.51:3030"
+let BLOCKCHAIN_URL = "http://169.61.3.247:3000";
+let BLOCKCHAIN_SOCKET = "http://169.61.3.247:3030"
 
 class Events {
   constructor() {
