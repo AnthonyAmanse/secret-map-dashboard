@@ -8,7 +8,7 @@ debug: false
 #  TLS section for the server's listening port
 #############################################################################
 tls:
-  enabled: true
+  enabled: false
   certfile: /ca/tls/cert.pem
   keyfile: /ca/tls/key.pem
   clientauth:

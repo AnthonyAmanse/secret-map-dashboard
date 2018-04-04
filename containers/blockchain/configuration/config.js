@@ -15,14 +15,14 @@ const config = {
   iotDashUrl: 'https://think-iot-processor.mybluemix.net/steps?message=',
   orderer: {
     hostname: 'orderer0',
-    url: 'grpcs://orderer0:7050',
+    url: 'grpc://orderer0:7050',
     pem: readCryptoFile('ordererOrg.pem')
   },
   peers: [{
     peer: {
       hostname: 'shop-peer',
-      url: 'grpcs://shop-peer:7051',
-      eventHubUrl: 'grpcs://shop-peer:7053',
+      url: 'grpc://shop-peer:7051',
+      eventHubUrl: 'grpc://shop-peer:7053',
       pem: readCryptoFile('shopOrg.pem'),
       userKeystoreDBName: 'seller_db',
       userKeystoreDBUrl: 'http://ca-datastore:5984',
@@ -33,7 +33,7 @@ const config = {
     },
     ca: {
       hostname: 'shop-ca',
-      url: 'https://shop-ca:7054',
+      url: 'http://shop-ca:7054',
       mspId: 'ShopOrgMSP',
       caName: 'shop-org'
     },
@@ -44,19 +44,19 @@ const config = {
   }, {
     peer: {
       hostname: 'fitcoin-peer',
-      url: 'grpcs://fitcoin-peer:7051',
+      url: 'grpc://fitcoin-peer:7051',
       pem: readCryptoFile('fitcoinOrg.pem'),
       userKeystoreDBName: 'user_db',
       userKeystoreDBUrl: 'http://ca-datastore:5984',
       stateDBName: 'member_db',
       stateDBUrl: 'http://fitcoin-statedb:5984',
-      eventHubUrl: 'grpcs://fitcoin-peer:7053',
+      eventHubUrl: 'grpc://fitcoin-peer:7053',
       org: 'org.FitCoinOrg',
       userType: 'user'
     },
     ca: {
       hostname: 'fitcoin-ca',
-      url: 'https://fitcoin-ca:7054',
+      url: 'http://fitcoin-ca:7054',
       mspId: 'FitCoinOrgMSP',
       caName: 'fitcoin-org'
     },
@@ -67,14 +67,14 @@ const config = {
   }]
 };
 if(process.env.LOCALCONFIG) {
-  config.orderer.url = 'grpcs://localhost:7050';
-  config.peers[0].peer.url = 'grpcs://localhost:7051';
-  config.peers[0].peer.eventHubUrl = 'grpcs://localhost:7053';
+  config.orderer.url = 'grpc://localhost:7050';
+  config.peers[0].peer.url = 'grpc://localhost:7051';
+  config.peers[0].peer.eventHubUrl = 'grpc://localhost:7053';
   config.peers[0].ca.url = 'https://localhost:7054';
   config.peers[0].peer.userKeystoreDBUrl = 'http://localhost:5984';
   config.peers[0].peer.stateDBUrl = 'http://localhost:9984';
-  config.peers[1].peer.url = 'grpcs://localhost:8051';
-  config.peers[1].peer.eventHubUrl = 'grpcs://localhost:8053';
+  config.peers[1].peer.url = 'grpc://localhost:8051';
+  config.peers[1].peer.eventHubUrl = 'grpc://localhost:8053';
   config.peers[1].ca.url = 'https://localhost:8054';
   config.peers[1].peer.userKeystoreDBUrl = 'http://localhost:5984';
   config.peers[1].peer.stateDBUrl = 'http://localhost:8984';
