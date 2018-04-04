@@ -11,6 +11,8 @@ docker build -t $DOCKERHUB_USERNAME/kubecon-fitcoin-peer:latest fitcoinPeer/
 docker build -t $DOCKERHUB_USERNAME/kubecon-shop-ca:latest shopCertificateAuthority/
 docker build -t $DOCKERHUB_USERNAME/kubecon-fitcoin-ca:latest fitcoinCertificateAuthority/
 docker build -t $DOCKERHUB_USERNAME/kubecon-blockchain-setup:latest blockchainNetwork/
+docker build -t $DOCKERHUB_USERNAME/kubecon-backend:latest backend/
+docker build -t $DOCKERHUB_USERNAME/kubecon-rabbitclient-api:latest rabbitClient/
 
 docker push $DOCKERHUB_USERNAME/kubecon-orderer-peer:latest
 docker push $DOCKERHUB_USERNAME/kubecon-shop-peer:latest
@@ -18,6 +20,8 @@ docker push $DOCKERHUB_USERNAME/kubecon-fitcoin-peer:latest
 docker push $DOCKERHUB_USERNAME/kubecon-shop-ca:latest
 docker push $DOCKERHUB_USERNAME/kubecon-fitcoin-ca:latest
 docker push $DOCKERHUB_USERNAME/kubecon-blockchain-setup:latest
+docker push $DOCKERHUB_USERNAME/kubecon-backend:latest
+docker push $DOCKERHUB_USERNAME/kubecon-rabbitclient-api:latest
 ```
 
 THEN edit yaml files in here to use your images
@@ -49,3 +53,12 @@ kubectl apply -f orderer0.yaml
 
 kubectl apply -f shop-peer.yaml
 kubectl apply -f fitcoin-peer.yaml
+
+kubectl apply -f blockchain-setup.yaml
+
+kubectl apply -f shop-backend.yaml
+kubectl apply -f fitcoin-backend.yaml
+
+kubectl apply -f rabbitclient-api.yaml
+
+kubectl scale deploy/fitcoin-backend-deployment --replicas=10

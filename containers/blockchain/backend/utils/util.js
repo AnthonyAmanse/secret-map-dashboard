@@ -4,7 +4,10 @@ import queryFunc from '../set-up/query';
 const uuidv4 = require('uuid/v4');
 const request = require('request');
 const amqp = require('amqplib/callback_api');
-var RedisClustr = require('redis-clustr');
+// var RedisClustr = require('redis-clustr');
+var url = require('url');
+var Redis = require('ioredis');
+
 async function invokeChaincode(type, client, values) {
   values = typeof values !== "string" ? values : JSON.parse(values);
   if(!values.userId) {
@@ -94,7 +97,8 @@ async function execute(type, client, params) {
 export async function createConnection(client, clientNo) {
   var expiry = process.env.MESSAGEEXPIRY || 300;
   var q = process.env.RABBITMQQUEUE || 'user_queue';
-  amqp.connect(config.rabbitmq, function (err, conn) {
+  var parsedurl = url.parse(config.rabbitmq);
+  amqp.connect(config.rabbitmq, {servername: parsedurl.hostname}, function (err, conn) {
     if(err) {
       console.error('connection failed', err);
       setTimeout(function () {
@@ -172,10 +176,5 @@ export async function createConnection(client, clientNo) {
   });
 }
 export function getRedisConnection() {
-  return new RedisClustr({
-    servers: [{
-      host: config.redisHost,
-      port: config.redisPort
-    }]
-  });
+  return new Redis(config.redisUrl);
 }

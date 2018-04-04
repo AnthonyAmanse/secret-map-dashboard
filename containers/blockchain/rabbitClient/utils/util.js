@@ -7,7 +7,8 @@ import config from './config';
 import {
   RabbitClient
 } from './channel';
-var RedisClustr = require('redis-clustr');
+// var RedisClustr = require('redis-clustr');
+var Redis = require('ioredis');
 const rabbitClient = new RabbitClient(config);
 (async () => {
   try {
@@ -27,10 +28,5 @@ export async function queueRequest(corrId, requestQueue, params) {
   });
 }
 export function getRedisConnection() {
-  return new RedisClustr({
-    servers: [{
-      host: config.redisHost,
-      port: config.redisPort
-    }]
-  });
+  return new Redis(config.redisUrl);
 }

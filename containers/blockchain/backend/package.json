@@ -19,6 +19,7 @@
     "fs": "0.0.1-security",
     "grpc": "^1.8.0",
     "http": "0.0.0",
+    "ioredis": "^3.2.2",
     "json-style-converter": "^1.0.3",
     "long": "^3.2.0",
     "path": "^0.12.7",

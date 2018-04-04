@@ -1,4 +1,6 @@
 const amqp = require('amqplib/callback_api');
+var url = require('url');
+
 export class RabbitClient {
   constructor(config) {
     this._config = config;
@@ -6,12 +8,13 @@ export class RabbitClient {
     this._connection = null;
     this._queue = null;
   }
+
   async configureClient(count) {
     var self = this;
     try {
       //console.log("connecting to rabbit server : " + this._config.rabbitmq);
       self._connection = await new Promise(function (resolve, reject) {
-        amqp.connect(self._config.rabbitmq, function (err, conn) {
+        amqp.connect(self._config.rabbitmq, { servername: url.parse(self._config.rabbitmq).hostname }, function (err, conn) {
           if(err) {
             console.log("Error in connecting rabbit queueserver");
             reject(err);
