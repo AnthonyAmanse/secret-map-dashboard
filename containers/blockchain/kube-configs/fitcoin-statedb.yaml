@@ -29,3 +29,10 @@ spec:
         name: fitcoin-statedb
         ports:
         - containerPort: 5984
+      #   volumeMounts:
+      #   - name: fitcoin-datastore-storage
+      #     mountPath: /opt/couchdb/data
+      # volumes:
+      # - name: fitcoin-datastore-storage
+      #   persistentVolumeClaim:
+      #     claimName: fitcoin-state-claim

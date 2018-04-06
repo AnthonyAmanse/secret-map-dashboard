@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: blockchain-vm
+spec:
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: blockchain-vm
+subsets:
+  - addresses:
+      - ip: 169.60.173.50
+    ports:
+      - port: 3000
