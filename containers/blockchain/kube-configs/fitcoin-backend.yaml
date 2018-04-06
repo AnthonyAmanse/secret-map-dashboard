@@ -28,7 +28,7 @@ spec:
           - name: MESSAGEEXPIRY
             value: "400"
           - name: EVENTEMITTER
-            value: "true"
+            value: "false"
           - name: SENDTOIOT
             value: "false"
           - name: SCALECLIENT
