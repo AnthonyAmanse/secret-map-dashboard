@@ -92,10 +92,11 @@ spec:
             mountPath: /host/var/run/docker.sock
           - name: shop-peer-storage
             mountPath: /var/hyperledger/production
+            subPath: shop-peer
       volumes:
         - name: dockersocket
           hostPath:
             path: /var/run/docker.sock
         - name: shop-peer-storage
           persistentVolumeClaim:
-            claimName: shop-peer-claim
+            claimName: peer-claim

@@ -27,7 +27,7 @@ spec:
       - image: anthonyamanse/kubecon-shop-ca:latest
         imagePullPolicy: Always
         command: ["fabric-ca-server"]
-        args: ["start","--db.datasource","db/fabric-ca-server.db"]
+        args: ["start","--db.datasource","db/shop-fabric-ca-server.db"]
         name: shop-ca
         ports:
         - containerPort: 7054
@@ -39,8 +39,8 @@ spec:
         volumeMounts:
         - name: shop-ca-storage
           mountPath: /ca/db
-          subPath: db
+          subPath: shop-ca-db
       volumes:
       - name: shop-ca-storage
         persistentVolumeClaim:
-          claimName: shop-ca-claim
+          claimName: org-ca-claim

@@ -92,10 +92,11 @@ spec:
             mountPath: /host/var/run/docker.sock
           - name: fitcoin-peer-storage
             mountPath: /var/hyperledger/production
+            subPath: fitcoin-peer
       volumes:
         - name: dockersocket
           hostPath:
             path: /var/run/docker.sock
         - name: fitcoin-peer-storage
           persistentVolumeClaim:
-            claimName: fitcoin-peer-claim
+            claimName: peer-claim

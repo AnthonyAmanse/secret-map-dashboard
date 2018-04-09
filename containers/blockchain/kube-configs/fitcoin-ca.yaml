@@ -27,7 +27,7 @@ spec:
       - image: anthonyamanse/kubecon-fitcoin-ca:latest
         imagePullPolicy: Always
         command: ["fabric-ca-server"]
-        args: ["start","--db.datasource","db/fabric-ca-server.db"]
+        args: ["start","--db.datasource","db/fitcoin-fabric-ca-server.db"]
         name: fitcoin-ca
         ports:
         - containerPort: 7054
@@ -39,8 +39,8 @@ spec:
         volumeMounts:
         - name: fitcoin-ca-storage
           mountPath: /ca/db
-          subPath: db
+          subPath: fitcoin-ca-db
       volumes:
       - name: fitcoin-ca-storage
         persistentVolumeClaim:
-          claimName: fitcoin-ca-claim
+          claimName: org-ca-claim

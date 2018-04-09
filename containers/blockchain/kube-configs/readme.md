@@ -68,6 +68,16 @@ Change directory
 
 cd kube-configs
 
+Create persistent volumes
+
+
+```
+kubectl create -f persistent-volume
+
+# this uses dynamic provisioning using ibmc-file-gold storage
+# for production, use static persistent volumes with your own NFS file storage
+```
+
 Create secrets and certificate authorities
 
 ```

@@ -57,7 +57,8 @@ spec:
         volumeMounts:
           - name: orderer0-storage
             mountPath: /var/hyperledger/production
+            subPath: orderer0
       volumes:
         - name: orderer0-storage
           persistentVolumeClaim:
-            claimName: orderer0-claim
+            claimName: peer-claim
