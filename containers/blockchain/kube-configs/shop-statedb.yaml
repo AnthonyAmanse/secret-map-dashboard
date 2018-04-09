@@ -29,10 +29,10 @@ spec:
         name: shop-statedb
         ports:
         - containerPort: 5984
-      #   volumeMounts:
-      #   - name: shop-datastore-storage
-      #     mountPath: /opt/couchdb/data
-      # volumes:
-      # - name: shop-datastore-storage
-      #   persistentVolumeClaim:
-      #     claimName: shop-state-claim
+        volumeMounts:
+        - name: shop-datastore-storage
+          mountPath: /opt/couchdb/data
+      volumes:
+      - name: shop-datastore-storage
+        persistentVolumeClaim:
+          claimName: shop-state-claim

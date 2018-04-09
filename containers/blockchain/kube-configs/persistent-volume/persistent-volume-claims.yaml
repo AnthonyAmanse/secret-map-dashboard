@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-    volume.beta.kubernetes.io/storage-class: "ibmc-file-bronze" # Comment this line to use dynamic provisioning (paid)
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
   name: ca-claim
   labels:
     app: fitcoin-volume
@@ -12,13 +12,13 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 4Gi
+      storage: 20Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-    volume.beta.kubernetes.io/storage-class: "ibmc-file-bronze" # Comment this line to use dynamic provisioning (paid)
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
   name: fitcoin-state-claim
   labels:
     app: fitcoin-volume
@@ -27,13 +27,13 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 4Gi
+      storage: 20Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-    volume.beta.kubernetes.io/storage-class: "ibmc-file-bronze" # Comment this line to use dynamic provisioning (paid)
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
   name: shop-state-claim
   labels:
     app: shop-state-volume
@@ -42,4 +42,79 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 4Gi
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
+  name: fitcoin-peer-claim
+  labels:
+    app: fitcoin-peer-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
+  name: shop-peer-claim
+  labels:
+    app: shop-peer-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
+  name: orderer0-claim
+  labels:
+    app: orderer0-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
+  name: fitcoin-ca-claim
+  labels:
+    app: fitcoin-ca-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold" # Comment this line to use dynamic provisioning (paid)
+  name: shop-ca-claim
+  labels:
+    app: shop-ca-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi

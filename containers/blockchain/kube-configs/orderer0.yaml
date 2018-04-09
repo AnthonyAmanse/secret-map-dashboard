@@ -54,3 +54,10 @@ spec:
           #   value: "/orderer/crypto/tls/server.crt"
           # - name: ORDERER_GENERAL_TLS_ROOTCAS
           #   value: "[/orderer/crypto/tls/ca.crt]"
+        volumeMounts:
+          - name: orderer0-storage
+            mountPath: /var/hyperledger/production
+      volumes:
+        - name: orderer0-storage
+          persistentVolumeClaim:
+            claimName: orderer0-claim
